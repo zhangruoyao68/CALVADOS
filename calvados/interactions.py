@@ -124,12 +124,25 @@ def init_slab_restraints(box,k):
     """ Define restraints towards box center in z direction. """
 
     mindim = np.amin(box)
+
+    '''
+    # slab equilibriation
     rcent_expr = 'k*abs(periodicdistance(x,y,z,x,y,z0))'
     rcent = openmm.CustomExternalForce(rcent_expr)
     rcent.addGlobalParameter('k',k*unit.kilojoules_per_mole/unit.nanometer)
     rcent.addGlobalParameter('z0',box[2]/2.*unit.nanometer) # center of box in z
     # rcent.setNonbondedMethod(openmm.CustomNonbondedForce.CutoffPeriodic)
     # rcent.setCutoffDistance(mindim/2.*unit.nanometer)
+    '''
+    
+    # cube equilibriation
+    rcent_expr = 'k*abs(periodicdistance(x,y,z,x0,y0,z0))'
+    rcent = openmm.CustomExternalForce(rcent_expr)
+    rcent.addGlobalParameter('k',k*unit.kilojoules_per_mole/unit.nanometer)
+    rcent.addGlobalParameter('x0',box[0]/2.*unit.nanometer) # center of box in x
+    rcent.addGlobalParameter('y0',box[1]/2.*unit.nanometer) # center of box in y
+    rcent.addGlobalParameter('z0',box[2]/2.*unit.nanometer) # center of box in z
+
     return rcent
 
 def add_single_restraint(
