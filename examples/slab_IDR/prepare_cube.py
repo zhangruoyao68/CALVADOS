@@ -13,20 +13,22 @@ args = parser.parse_args()
 
 cwd = os.getcwd()
 N_save = int(5e4)
-N_frames = 3000
+N_frames = 300 # default 3000 frames
 
 sysname = f'{args.name:s}_{args.replica:d}'
 residues_file = f'{cwd}/input/residues_CALVADOS2.csv'
 
+box_size = 59.36 # nm
+
 config = Config(
   # GENERAL
   sysname = sysname, # name of simulation system
-  box = [50., 50., 50.], # nm
+  box = [box_size, box_size, box_size], # nm # value to match lassi 200-chain system
   temp = 300,
   ionic = 0.15, # molar
   pH = 7,
   topol = 'grid',
-  slab_width = 20,
+  slab_width = box_size, # default 20
   friction = 0.01,
 
   # INPUT
