@@ -40,7 +40,7 @@ config = Config(
   wfreq = N_save, # dcd writing frequency, 1 = 10fs
   steps = N_frames*N_save, # number of simulation steps
   runtime = 0, # overwrites 'steps' keyword if > 0
-  platform = 'CUDA', # 'CUDA'
+  platform = 'CUDA', # 'CUDA' 'OpenCL' or 'CPU'
   restart = 'checkpoint',
   frestart = 'restart.chk',
   verbose = True,
