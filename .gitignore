@@ -6,6 +6,7 @@ tests/
 *.pyc
 *.pyo
 *.pyd
+*.dcd
 
 hnRNPA1LCD_200/
 
